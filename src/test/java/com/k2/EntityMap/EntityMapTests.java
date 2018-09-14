@@ -22,9 +22,11 @@ public class EntityMapTests {
 
 	
 	@Test
-	public void reflectionLoopTest() {
+	public void createEntityMapTest() {
 
-
+		EntityMap em = EntityMap.create();
+		
+		assertNotNull(em);
 
 	}
 	
