@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	EntityMapTests.class
+	EntityMapTests.class,
+	EntitiesMapTests.class
 })
 public class EntityMapTestSuite {
 
