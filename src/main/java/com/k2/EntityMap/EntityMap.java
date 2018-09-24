@@ -62,6 +62,19 @@ public class EntityMap<E,K> {
 		return Lists.newArrayList(map.values());
 	}
 
+	@SuppressWarnings("unchecked")
+	public boolean contains(Object obj) {
+		if (obj.getClass() == keyClass) {
+			return map.containsKey((K)obj);
+		} else if (entityClass.isAssignableFrom(obj.getClass())) {
+			
+			K key = (K) IdentityUtil.getId(obj);
+			return map.containsKey(key);
+		} else {
+			throw new EntityMapError("The object (class: {}) to check for is neither an instance of the entityClass or the keyClass", obj.getClass().getSimpleName()) ;
+		}
+	}
+
 
 
 }
