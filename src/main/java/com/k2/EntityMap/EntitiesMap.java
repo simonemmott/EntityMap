@@ -17,8 +17,8 @@ public class EntitiesMap {
 	
 	private Map<Class<?>,EntityMap> map = new HashMap<Class<?>,EntityMap>();
 	
-	private <E> EntityMap<E,?> getClassMap(Class<E> entityClass) {
-		EntityMap<E,?> em = map.get(entityClass);
+	public <E> EntityMap<E,?> getClassMap(Class<E> entityClass) {
+		EntityMap<E,?> em = map.get(IdentityUtil.getBaseEntityClass(entityClass));
 		Class<?> keyClass = IdentityUtil.getKeyClass(entityClass);
 		if (em == null) {
 			em = EntityMap.create(entityClass, keyClass);
@@ -39,8 +39,15 @@ public class EntitiesMap {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public <E> E get(Class<E> entityClass, Object key ) {
-		return getClassMap(entityClass).get(key);
+		Object obj = getClassMap(entityClass).get(key);
+		if (obj == null)
+			return null;
+		if (entityClass.isAssignableFrom(obj.getClass())) {
+			return (E) obj;
+		}
+		return null;
 	}
 
 	public <E> void remove(Class<E> entityClass, Object key) {

@@ -1,7 +1,9 @@
 package com.k2.EntityMap;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class EntityA {
 
 	@Id

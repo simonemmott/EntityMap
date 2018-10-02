@@ -63,6 +63,7 @@ public class EntitiesMapTests {
 		assertEquals(eb2, b2);
 		
 		assertNull(em.get(ExtendedA.class, 1));
+		assertNotNull(em.get(ExtendedA.class, 3));
 		
 	}
 	
